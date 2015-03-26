@@ -23,8 +23,9 @@ service apache2 reload
 # Download and extract
 if [[ ! -f "${MAGE_DIR}/index.php" ]]; then
 	mkdir -p ${MAGE_DIR}
+	ln -fs ${MAGE_DIR} /var/www/html/${SITE_NAME}
 	cd /tmp
-	wget -c  http://www.magentocommerce.com/downloads/assets/${MAGE_VERSION}/magento-${MAGE_VERSION}.tar.gz
+	wget -nv http://www.magentocommerce.com/downloads/assets/${MAGE_VERSION}/magento-${MAGE_VERSION}.tar.gz
 	tar -zxvf magento-${MAGE_VERSION}.tar.gz
 	mv magento/* magento/.htaccess ${MAGE_DIR}/
 	cd ${MAGE_DIR}/
@@ -60,6 +61,6 @@ fi
 # Install n98-magerun
 # --------------------
 cd /tmp
-wget https://raw.github.com/netz98/n98-magerun/master/n98-magerun.phar
+wget -nv https://raw.github.com/netz98/n98-magerun/master/n98-magerun.phar
 chmod +x ./n98-magerun.phar
 sudo mv ./n98-magerun.phar /usr/local/bin/

@@ -21,7 +21,7 @@ service apache2 reload
 mkdir -p ${PS_DIR}
 ln -fs ${PS_DIR} /var/www/html/#{PS_NAME}
 cd /tmp
-wget http://www.prestashop.com/download/old/${PS_VERSION}
+wget -nv http://www.prestashop.com/download/old/${PS_VERSION}
 unzip -o ${PS_VERSION}
 mv prestashop ${PS_DIR}
 
