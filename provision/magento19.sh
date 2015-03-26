@@ -2,7 +2,9 @@
 
 # Mostly from https://github.com/r-baker/simple-magento-vagrant
 
+
 SITE_NAME="magento19"
+LOCK=/var/www/html/${SITE_NAME}
 MAGE_DIR_NAME=${SITE_NAME}
 DB_NAME=${MAGE_DIR_NAME}
 MAGE_DIR="/var/www/html/sites/${MAGE_DIR_NAME}"
@@ -14,6 +16,9 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME}"
 mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO 'magentouser'@'localhost' IDENTIFIED BY 'password'"
 mysql -u root -e "FLUSH PRIVILEGES"
 
+if [[ -f ${LOCK} ]]; then
+	exit
+fi
 
 # apache
 cp /vagrant/assets/000-${SITE_NAME}.conf /etc/apache2/sites-available/
@@ -66,3 +71,5 @@ echo "Downloading..."
 wget -nv https://raw.github.com/netz98/n98-magerun/master/n98-magerun.phar
 chmod +x ./n98-magerun.phar
 sudo mv ./n98-magerun.phar /usr/local/bin/
+
+touch ${LOCK}
