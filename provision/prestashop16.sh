@@ -19,11 +19,11 @@ service apache2 reload
 
 # download prestashop
 mkdir -p ${PS_DIR}
-ln -fs ${PS_DIR} /var/www/html/#{PS_NAME}
+ln -fs ${PS_DIR} /var/www/html/${PS_NAME}
 cd /tmp
 wget -nv http://www.prestashop.com/download/old/${PS_VERSION}
 unzip -o ${PS_VERSION}
-mv prestashop ${PS_DIR}
+mv prestashop/* ${PS_DIR}
 
 # install http://doc.prestashop.com/display/PS16/Installing+PrestaShop+using+the+command-line+script
 cd ${PS_DIR}/install
