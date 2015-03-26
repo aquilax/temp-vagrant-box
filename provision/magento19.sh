@@ -5,7 +5,7 @@
 SITE_NAME="magento19"
 MAGE_DIR_NAME=${SITE_NAME}
 DB_NAME=${MAGE_DIR_NAME}
-MAGE_DIR="/vagrant/project/sites/${MAGE_DIR_NAME}"
+MAGE_DIR="/var/www/html/sites/${MAGE_DIR_NAME}"
 MAGE_VERSION="1.9.1.0"
 DATA_VERSION="1.9.0.0"
 
@@ -29,8 +29,8 @@ if [[ ! -f "${MAGE_DIR}/index.php" ]]; then
 	tar -zxvf magento-${MAGE_VERSION}.tar.gz
 	mv magento/* magento/.htaccess ${MAGE_DIR}/
 	cd ${MAGE_DIR}/
-	chmod -R o+w media var
-	chmod o+w app/etc
+	chmod -R 777 media var
+	chmod 777 app/etc
 
 	# sample data - this is huge
 	# cd /tmp

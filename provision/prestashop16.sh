@@ -6,7 +6,7 @@
 PS_VERSION=prestashop_1.6.0.14.zip
 PS_NAME="prestashop16"
 DB_NAME=${PS_NAME}
-PS_DIR="/vagrant/project/sites/${PS_NAME}"
+PS_DIR="/var/www/html/sites/${PS_NAME}"
 
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME}"
 mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO 'magentouser'@'localhost' IDENTIFIED BY 'password'"
@@ -19,7 +19,6 @@ service apache2 reload
 
 # download prestashop
 mkdir -p ${PS_DIR}
-ln -fs ${PS_DIR} /var/www/html/${PS_NAME}
 cd /tmp
 wget -nv http://www.prestashop.com/download/old/${PS_VERSION}
 unzip -o ${PS_VERSION}

@@ -14,6 +14,8 @@ Vagrant.configure(2) do |config|
 
   config.ssh.forward_agent = true
 
+  config.vm.synced_folder "project", "/var/www/html", owner: "www-data", group: "www-data"
+
   config.vm.provision :shell, path: "./provision/bootstrap_root.sh"
   config.vm.provision :shell, path: "./provision/prestashop16.sh"
   config.vm.provision :shell, path: "./provision/magento19.sh"
