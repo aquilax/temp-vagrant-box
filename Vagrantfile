@@ -15,4 +15,5 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, path: "./provision/bootstrap_root.sh"
   config.vm.provision :shell, path: "./provision/prestashop16.sh"
   config.vm.provision :shell, path: "./provision/magento19.sh"
+  config.vm.provision :shell, path: "./provision/modules.sh"
 end
