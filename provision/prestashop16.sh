@@ -20,12 +20,14 @@ service apache2 reload
 # download prestashop
 mkdir -p ${PS_DIR}
 cd /tmp
+echo "Downloading..."
 wget -nv http://www.prestashop.com/download/old/${PS_VERSION}
 unzip -o ${PS_VERSION}
-mv prestashop/* ${PS_DIR}
+cp -r prestashop/* ${PS_DIR}
+rm -rf prestashop
 
 # install http://doc.prestashop.com/display/PS16/Installing+PrestaShop+using+the+command-line+script
 cd ${PS_DIR}/install
-php index_cli.php --domain=${PS_NAME}.local --db_server=localhost --db_name=${DB_NAME} --db_user=root
+php index_cli.php --domain=${PS_NAME}.local:8090 --db_server=localhost --db_name=${DB_NAME} --db_user=root
 rm -rf ${PS_DIR}/install
 mv ${PS_DIR}/admin ${PS_DIR}/admin1234

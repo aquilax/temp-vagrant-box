@@ -23,8 +23,8 @@ service apache2 reload
 # Download and extract
 if [[ ! -f "${MAGE_DIR}/index.php" ]]; then
 	mkdir -p ${MAGE_DIR}
-	ln -fs ${MAGE_DIR} /var/www/html/${SITE_NAME}
 	cd /tmp
+	echo "Downloading..."
 	wget -nv http://www.magentocommerce.com/downloads/assets/${MAGE_VERSION}/magento-${MAGE_VERSION}.tar.gz
 	tar -zxvf magento-${MAGE_VERSION}.tar.gz
 	mv magento/* magento/.htaccess ${MAGE_DIR}/
@@ -36,7 +36,8 @@ if [[ ! -f "${MAGE_DIR}/index.php" ]]; then
 	# cd /tmp
 	# if [[ ! -f "/vagrant/magento-sample-data-${DATA_VERSION}.tar.gz" ]]; then
 	# 	# Only download sample data if we need to
-	# 	wget http://www.magentocommerce.com/downloads/assets/${DATA_VERSION}/magento-sample-data-${DATA_VERSION}.tar.gz
+	#	echo "Downloading..."
+	# 	wget -nv http://www.magentocommerce.com/downloads/assets/${DATA_VERSION}/magento-sample-data-${DATA_VERSION}.tar.gz
 	# fi
 	# tar -zxvf magento-sample-data-${DATA_VERSION}.tar.gz
 	# cp -R magento-sample-data-${DATA_VERSION}/media/* ${MAGE_DIR}/media/
@@ -50,8 +51,8 @@ if [ ! -f "${MAGE_DIR}/app/etc/local.xml" ]; then
   sudo /usr/bin/php -f install.php -- --license_agreement_accepted yes \
   --locale en_US --timezone "Europe/Stockholm" --default_currency SEK \
   --db_host localhost --db_name ${DB_NAME} --db_user magentouser --db_pass password \
-  --url "http://magento.local:8090/" --use_rewrites yes \
-  --use_secure no --secure_base_url "http://magento.local:8090/" --use_secure_admin no \
+  --url "http://${SITE_NAME}.local:8090/" --use_rewrites yes \
+  --use_secure no --secure_base_url "http://${SITE_NAME}.local:8090/" --use_secure_admin no \
   --skip_url_validation yes \
   --admin_lastname Owner --admin_firstname Store --admin_email "admin@example.com" \
   --admin_username admin --admin_password password123123
@@ -61,6 +62,7 @@ fi
 # Install n98-magerun
 # --------------------
 cd /tmp
+echo "Downloading..."
 wget -nv https://raw.github.com/netz98/n98-magerun/master/n98-magerun.phar
 chmod +x ./n98-magerun.phar
 sudo mv ./n98-magerun.phar /usr/local/bin/
