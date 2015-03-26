@@ -12,7 +12,7 @@ git clone git@github.com:fyndiq/fyndiq-prestashop-module.git
 pushd fyndiq-prestashop-module
 git submodule update --init --recursive
 popd
-ln -s ${MODULES_ROOT}/fyndiq-prestashop-module "${PROJECT_ROOT}/sites/prestashop16/modules/fyndiq"
+ln -s ${MODULES_ROOT}/fyndiq-prestashop-module/fyndiqmerchant "${PROJECT_ROOT}/sites/prestashop16/modules/fyndiqmerchant"
 
 git clone git@github.com:fyndiq/fyndiq-magento-module.git
 pushd fyndiq-magento-module
