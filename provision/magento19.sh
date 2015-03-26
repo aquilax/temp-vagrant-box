@@ -46,7 +46,7 @@ fi
 
 # Run installer
 if [ ! -f "${MAGE_DIR}/app/etc/local.xml" ]; then
-  cd /vagrant/httpdocs
+  cd ${MAGE_DIR}
   sudo /usr/bin/php -f install.php -- --license_agreement_accepted yes \
   --locale en_US --timezone "Europe/Stockholm" --default_currency SEK \
   --db_host localhost --db_name ${DB_NAME} --db_user magentouser --db_pass password \
