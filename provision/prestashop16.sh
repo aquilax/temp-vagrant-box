@@ -37,5 +37,6 @@ rm -rf prestashop
 cd ${PS_DIR}/install
 php index_cli.php --domain=${PS_NAME}.local:8090 --db_server=localhost --db_name=${DB_NAME} --db_user=root
 rm -rf ${PS_DIR}/install
+mv ${PS_DIR}/admin ${PS_DIR}/admin1234
 
 touch ${LOCK}
